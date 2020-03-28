@@ -19,8 +19,8 @@ routes.get('/ongs', OngController.index);
 routes.post('/ongs', celebrate({
     [Segments.BODY]: Joi.object().keys({
         name: Joi.string().required(),
-        email: Joi.string().required().email,
-        whatsapp: Joi.number().required().min(10).max(11),
+        email: Joi.string().required().email(),
+        whatsapp: Joi.number().required(),
         city: Joi.string().required(),
         uf: Joi.string().required().length(2),
     })
@@ -44,9 +44,9 @@ routes.post('/incidents', celebrate({
         description: Joi.string().required().min(30).max(100),
         value: Joi.number()
     }),
-    [Segments.PARAMS]: Joi.object().keys({
-        id: Joi.number().required()
-    })
+    [Segments.HEADERS]: Joi.object({
+        auth: Joi.string().required(),
+    }).unknown(),
 }), IncidentController.create);
 
 routes.delete('/incidents/:id', celebrate({

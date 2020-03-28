@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useHistory  } from 'react-router-dom'
 import { FiPower, FiTrash2 } from 'react-icons/fi'
 
@@ -13,7 +13,7 @@ export default function Profile(){
 
     const history = useHistory();
 
-    const [incidents, setIncidents] = useState([]);
+    const [incidents, setIncidents] = useState([])
 
     useEffect(() => {
         api.get('profile', {
@@ -21,9 +21,9 @@ export default function Profile(){
                 Auth: ongId,
             }
         }).then(res => {
-            setIncidents(res.data);
+            setIncidents(res.data)
         })
-    }, [ongId]);
+    })
 
     async function handleDeleteIncident(id) {
         try {
